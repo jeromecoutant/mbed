@@ -12604,7 +12604,8 @@
             "SERIAL_FC",
             "TRNG",
             "FLASH",
-            "MPU"
+            "MPU",
+            "USBDEVICE"
         ],
         "device_name": "STM32WB55RGVx",
         "features": [
