@@ -78,7 +78,8 @@
  ******************************************************************************/
 static void evt_received(TL_EvtPacket_t *hcievt);
 static void syscmd_status_not(SHCI_TL_CmdStatus_t status);
-static void sysevt_received(void *pdata);
+static void APPE_SysUserEvtRx(void *pPayload);
+static SHCI_TL_UserEventFlowStatus_t APPE_SysevtReadyProcessing(SHCI_C2_Ready_Evt_t *pReadyEvt);
 static void acl_data_ack(void);
 static bool acl_data_wait(void);
 static void init_debug(void);
@@ -133,17 +134,18 @@ public:
         HciResetCmd();
     }
 
-    static uint8_t convert_db_to_tx_power_index(int8_t level_db) {
+    static uint8_t convert_db_to_tx_power_index(int8_t level_db)
+    {
         const int8_t conversion[] = {
             -40, -21, -20, -19,
-            -18, -16, -15, -14,
-            -13, -12, -11, -10,
-             -9,  -8,  -7,  -6,
-             -5,  -4,  -3,  -2,
-             -1,  -1,  -1,  -1,
-              0,   0,   1,   2,
-              3,   4,   5,   6
-        };
+                -18, -16, -15, -14,
+                -13, -12, -11, -10,
+                -9,  -8,  -7,  -6,
+                -5,  -4,  -3,  -2,
+                -1,  -1,  -1,  -1,
+                0,   0,   1,   2,
+                3,   4,   5,   6
+            };
 
         uint8_t index;
         for (index = 0; index < sizeof(conversion); ++index) {
@@ -154,7 +156,8 @@ public:
         return index;
     }
 
-    virtual ble_error_t set_tx_power(int8_t level_db) {
+    virtual ble_error_t set_tx_power(int8_t level_db)
+    {
 
 
         uint8_t buf[2];
@@ -518,15 +521,15 @@ private:
            offering system services, with proprietary commands.
            System Channel must be used as well for starting up
            BLE service so we need to initialize it. */
-        SHCI_TL_HciInitConf_t shci_init_config;
+        SHCI_TL_HciInitConf_t SHci_Tl_Init_Conf;
 
         /**< Reference table initialization */
         TL_Init();
 
         /**< System channel initialization */
-        shci_init_config.p_cmdbuffer = (uint8_t *)sysCmdBuf;
-        shci_init_config.StatusNotCallBack = syscmd_status_not;
-        shci_init(sysevt_received, (void *) &shci_init_config);
+        SHci_Tl_Init_Conf.p_cmdbuffer = (uint8_t *)sysCmdBuf;
+        SHci_Tl_Init_Conf.StatusNotCallBack = syscmd_status_not;
+        shci_init(APPE_SysUserEvtRx, (void *) &SHci_Tl_Init_Conf);
 
         /**< Memory Manager channel initialization */
         tl_mm_config.p_BleSpareEvtBuffer = bleSpareEvtBuf;
@@ -785,27 +788,137 @@ static bool acl_data_wait(void)
 
     /* Wait 10 sec for previous ACL command to be ack'ed by Low Layers
      * before sending the next one */
-    if (!acl_ack_sem.try_acquire_for(10000)) {
+    if (!acl_ack_sem.try_acquire_for(10s)) {
         return false;
     } else {
         return true;
     }
 }
 
-/*  WEAK callbacks from the BLE TL driver - will be called under Interrupt */
-static void sysevt_received(void *pdata)
+static void APPE_SysUserEvtRx(void *pPayload)
 {
-    /* For now only READY event is received, so we know this is it */
-    sys_event_sem.release();
-    /* But later on ... we'll have to parse the answer */
+    TL_AsynchEvt_t *p_sys_event;
+
+    p_sys_event = (TL_AsynchEvt_t *)(((tSHCI_UserEvtRxParam *)pPayload)->pckt->evtserial.evt.payload);
+
+    switch (p_sys_event->subevtcode) {
+        case SHCI_SUB_EVT_CODE_READY:
+            ((tSHCI_UserEvtRxParam *)pPayload)->status = APPE_SysevtReadyProcessing((SHCI_C2_Ready_Evt_t *)p_sys_event->payload);
+
+            break;
+
+        default:
+            break;
+    }
+
     return;
 }
+
+
+static SHCI_TL_UserEventFlowStatus_t APPE_SysevtReadyProcessing(SHCI_C2_Ready_Evt_t *pReadyEvt)
+{
+    uint8_t fus_state_value;
+    SHCI_TL_UserEventFlowStatus_t return_value;
+
+    if (pReadyEvt->sysevt_ready_rsp == WIRELESS_FW_RUNNING) {
+        return_value = SHCI_TL_UserEventFlow_Enable;
+
+        if (CFG_OTA_REBOOT_VAL_MSG == CFG_REBOOT_ON_CPU2_UPGRADE) {
+            /**
+             * The wireless stack update has been completed
+             * Reboot on the firmware application
+             */
+            CFG_OTA_REBOOT_VAL_MSG = CFG_REBOOT_ON_FW_APP;
+            NVIC_SystemReset(); /* it waits until reset */
+        } else {
+            /**
+             * Run the Application
+             */
+            sys_event_sem.release();
+
+        }
+    } else {
+        /**
+         * FUS is running on CPU2
+         */
+        return_value = SHCI_TL_UserEventFlow_Disable;
+
+        /**
+         * The CPU2 firmware update procedure is starting from now
+         * There may be several device reset during CPU2 firmware upgrade
+         * The key word at the beginning of SRAM1 shall be changed CFG_REBOOT_ON_CPU2_UPGRADE
+         *
+         * Wireless Firmware upgrade:
+         * Once the upgrade is over, the CPU2 will run the wireless stack
+         * When the wireless stack is running, the SRAM1 is checked and when equal to CFG_REBOOT_ON_CPU2_UPGRADE,
+         * it means we may restart on the firmware application.
+         *
+         * FUS Firmware Upgrade:
+         * Once the upgrade is over, the CPU2 will run FUS and the FUS return the Idle state
+         * The SRAM1 is checked and when equal to CFG_REBOOT_ON_CPU2_UPGRADE,
+         * it means we may restart on the firmware application.
+         */
+        fus_state_value = SHCI_C2_FUS_GetState(NULL);
+
+        if (fus_state_value == 0xFF) {
+            /**
+             * This is the first time in the life of the product the FUS is involved. After this command, it will be properly initialized
+             * Request the device to reboot to install the wireless firmware
+             */
+            NVIC_SystemReset(); /* it waits until reset */
+        } else if (fus_state_value != 0) {
+            /**
+             * An upgrade is on going
+             * Wait to reboot on the wireless stack
+             */
+            while (1) {
+                HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+            }
+        } else {
+            /**
+             * FUS is idle
+             * Request an upgrade and wait to reboot on the wireless stack
+             * The first two parameters are currently not supported by the FUS
+             */
+            if (CFG_OTA_REBOOT_VAL_MSG == CFG_REBOOT_ON_CPU2_UPGRADE) {
+                /**
+                 * The FUS update has been completed
+                 * Reboot the CPU2 on the firmware application
+                 */
+                CFG_OTA_REBOOT_VAL_MSG = CFG_REBOOT_ON_FW_APP;
+                SHCI_C2_FUS_StartWs();
+
+                while (1) {
+                    HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+                }
+            } else {
+                CFG_OTA_REBOOT_VAL_MSG = CFG_REBOOT_ON_CPU2_UPGRADE;
+                /**
+                 * Note:
+                 * If a reset occurs now, on the next reboot the FUS will be idle and a CPU2 reboot on the
+                 * wireless stack will be requested because SRAM1 is set to CFG_REBOOT_ON_CPU2_UPGRADE
+                 * The device is still operational but no CPU2 update has been done.
+                 */
+                SHCI_C2_FUS_FwUpgrade(0, 0);
+
+                while (1) {
+                    HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+                }
+            }
+        }
+    }
+
+    return return_value;
+}
+
+
+
 
 /*  returns true if ssyevt was received, false otherwise */
 static bool sysevt_wait(void)
 {
     /*  Wait for 10sec max - if not return an error */
-    if (!sys_event_sem.try_acquire_for(10000)) {
+    if (!sys_event_sem.try_acquire_for(10s)) {
         return false;
     } else {
         /*  release immmediately, now that M0 runs */
@@ -819,7 +932,7 @@ static bool sysevt_wait(void)
 static bool sysevt_check(void)
 {
     /*  Check if system is UP and runing already */
-    if (!sys_event_sem.try_acquire_for(10)) {
+    if (!sys_event_sem.try_acquire_for(10ms)) {
         return false;
     } else {
         /*  release immmediately as M0 already runs */
