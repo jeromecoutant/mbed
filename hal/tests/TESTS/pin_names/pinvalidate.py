@@ -17,18 +17,29 @@ with open(args.path_to_PinNames) as pinNameFile:
     pinNameVals = dict(re.findall("^\s*([a-zA-Z0-9_]+)\s*=\s*([a-zA-Z0-9_]+)", pinNameEnumBody, re.MULTILINE))
     
     used_pins = []
-    for key, val in pinNameVals.items():
-        if val in used_pins:
-            print(key + ' = ' + val + '\tInvalid assignment: duplicate value')
-            continue
 
+    for key, val in pinNameVals.items():
+        # generic checks
+        if val == key:
+            print(key + ' = ' + val + '\tInvalid assignment: cannot assign value to itself')
+            continue
         if val == 'NC':
             print(key + ' = ' + val + '\tInvalid assignment: cannot be NC')
             continue
 
-        if re.match("^(LED|BUTTON)\d*", val):
-            print(key + ' = ' + val + '\tInvalid assignment: cannot be another LED or BUTTON')
-            continue
+        # LED/BUTTON/UART checks
+        if re.match("^((LED|BUTTON)\d*|USBTX|USBRX)$", key):
+            # resolve to literal
+            realval = val
+            while not re.match("(0x[0-9a-fA-F]+|[1-9][0-9]*|0[1-7][0-7]+|0b[01]+)[uUlL]{0,2}", realval):
+                try:
+                    realval = pinNameVals[realval]
+                except:
+                    print(key + " does not resolve to a literal!")
+                    break
 
-        if not re.match("^P[A-J]_\d+", val):
-            used_pins.append(val)
+            if realval in used_pins:
+                print(key + ' = ' + val + '\tInvalid assignment: ' + realval + ' already assigned')
+                continue
+
+            used_pins.append(realval)
