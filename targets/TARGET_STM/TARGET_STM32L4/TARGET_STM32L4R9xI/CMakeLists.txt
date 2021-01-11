@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 add_subdirectory(TARGET_DISCO_L4R9I EXCLUDE_FROM_ALL)
+add_subdirectory(TARGET_STWIN EXCLUDE_FROM_ALL)
 
 if(${MBED_TOOLCHAIN} STREQUAL "GCC_ARM")
     set(STARTUP_FILE TOOLCHAIN_GCC_ARM/startup_stm32l4r9xx.S)

@@ -3993,6 +3993,24 @@
             "USBDEVICE"
         ]
     },
+    "STWIN": {
+        "inherits": [
+            "MCU_STM32L4R9xI"
+        ],
+        "device_name": "STM32L4R9ZITx",
+        "supported_form_factors": [
+            "STMOD"
+        ],
+        "components_add": [
+            "BlueNRG_MS"
+        ],
+        "extra_labels_add": [
+            "CORDIO"
+        ],
+        "features": [
+            "BLE"
+        ]
+    },
     "MCU_STM32L4S5xI": {
         "inherits": [
             "MCU_STM32L4"
