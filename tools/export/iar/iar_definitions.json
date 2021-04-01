@@ -1,65 +1,83 @@
 {
-    "STM32L443RC": {
+    "STM32L443RCTx": {
         "OGChipSelectEditMenu": "STM32L443RC\tST STM32L443RC"
     },
-    "STM32L433RC": {
+    "STM32L433RCTx": {
         "OGChipSelectEditMenu": "STM32L433RC\tST STM32L433RC"
     },
-    "STM32L496AG": {
+    "STM32L496AGIx": {
         "OGChipSelectEditMenu": "STM32L496AG\tST STM32L496AG"
     },
-    "STM32L496ZG": {
+    "STM32L496ZGTx": {
         "OGChipSelectEditMenu": "STM32L496ZG\tST STM32L496ZG"
     },
-    "STM32L476VG": {
+    "STM32L476VGTx": {
         "OGChipSelectEditMenu": "STM32L476VG\tST STM32L476VG"
     },
-    "STM32L475VG": {
+    "STM32L475VGTx": {
         "OGChipSelectEditMenu": "STM32L475VG\tST STM32L475VG"
+    },
+    "STM32L4R5ZITx": {
+        "OGChipSelectEditMenu": "STM32L4R5ZI\tST STM32L4R5ZI"
+    },
+    "STM32L4R9AIIx": {
+        "OGChipSelectEditMenu": "STM32L4R9AI\tST STM32L4R9AI"
+    },
+    "STM32L4S5VITx": {
+        "OGChipSelectEditMenu": "STM32L4S5VI\tST STM32L4S5VI"
+    },
+    "STM32L552ZETxQ": {
+        "OGChipSelectEditMenu": "STM32L552ZE\tST STM32L552ZE"
+    },
+    "STM32L562QEIxQ": {
+        "OGChipSelectEditMenu": "STM32L562QE\tST STM32L562QE"
     },
     "LPC11U24FBD48/401": {
         "OGChipSelectEditMenu": "LPC11U24FBD64_401\tNXP LPC11U24FBD64_401"
     },
-    "STM32F207ZG": {
+    "STM32F207ZGTx": {
          "OGChipSelectEditMenu": "STM32F207ZG\tST STM32F207ZG"
     },
-    "STM32F334R8": {
-        "OGChipSelectEditMenu": "STM32F334x8\tST STM32F334x8"
-    },
-    "STM32F302R8": {
-        "OGChipSelectEditMenu": "STM32F302x8\tST STM32F302x8"
+    "STM32G031K8Tx": {
+        "OGChipSelectEditMenu": "STM32G031K8\tST STM32G031K8"
     },
     "STM32G071RBTx": {
         "OGChipSelectEditMenu": "STM32G071RB\tST STM32G071RB"
     },
+    "STM32G431KBTx": {
+        "OGChipSelectEditMenu": "STM32G431KB\tST STM32G431KB"
+    },
+    "STM32G474RETx": {
+        "OGChipSelectEditMenu": "STM32G474RE\tST STM32G474RE"
+    },
     "STM32WB55RGVx": {
         "OGChipSelectEditMenu": "STM32WB55RG\tST STM32WB55RG"
+    },
+    "STM32WL55JCIx": {
+        "OGChipSelectEditMenu": "STM32WL55JC\tST STM32WL55JC"
     },
     "EFM32LG990F256": {
         "OGChipSelectEditMenu": "EFM32LG990F256\tSiliconLaboratories EFM32LG990F256"
     },
-    "STM32F042K6": {
-        "OGChipSelectEditMenu": "STM32F042x6\tST STM32F042x6"
+    "STM32L452RETx": {
+        "OGChipSelectEditMenu": "STM32L452RE\tST STM32L452RE"
     },
-    "STM32L476RG": {
+    "STM32L471QGIx": {
+        "OGChipSelectEditMenu": "STM32L471QG\tST STM32L471QG"
+    },
+    "STM32L476RGTx": {
         "OGChipSelectEditMenu": "STM32L476RG\tST STM32L476RG"
     },
-    "STM32L486RG": {
+    "STM32L486RGTx": {
         "OGChipSelectEditMenu": "STM32L486RG\tST STM32L486RG"
-    },
-    "STM32L476JG": {
-        "OGChipSelectEditMenu": "STM32L476JG\tST STM32L476JG"
-    },
-    "STM32L011K4": {
-        "OGChipSelectEditMenu": "STM32L011x4\tST STM32L011x4"
     },
     "EFM32WG990F256": {
         "OGChipSelectEditMenu": "EFM32WG990F256\tSiliconLaboratories EFM32WG990F256"
     },
-    "STM32F401RE": {
+    "STM32F401RETx": {
         "OGChipSelectEditMenu": "STM32F401xE\tST STM32F401xE"
     },
-    "STM32F070RB": {
+    "STM32F070RBTx": {
         "OGChipSelectEditMenu": "STM32F070RB\tST STM32F070RB"
     },
     "MK22DN512xxx5": {
@@ -99,7 +117,7 @@
     "MIMXRT1052": {
         "OGChipSelectEditMenu": "MIMXRT1052xxx6B\tNXP MIMXRT1052xxx6B"
     },
-    "STM32F072RB": {
+    "STM32F072RBTx": {
         "OGChipSelectEditMenu": "STM32F072RB\tST STM32F072RB"
     },
     "EFM32GG990F1024": {
@@ -108,71 +126,69 @@
     "MKL46Z256xxx4": {
         "OGChipSelectEditMenu": "MKL46Z256xxx4\tFreescale MKL46Z256xxx4"
     },
-    "STM32F030R8": {
-        "OGChipSelectEditMenu": "STM32F030x8\tST STM32F030x8"
-    },
     "EFM32ZG222F32": {
         "OGChipSelectEditMenu": "EFM32ZG220F32\tSiliconLaboratories EFM32ZG220F32"
     },
-    "STM32F303RE": {
-        "OGChipSelectEditMenu": "STM32F303xE\tST STM32F303xE"
+    "STM32F303RETx": {
+        "OGChipSelectEditMenu": "STM32F303RE\tST STM32F303RE"
     },
-    "STM32L151CC": {
+    "STM32L151CCTx": {
         "OGChipSelectEditMenu": "STM32L151CC\tST STM32L151CC"
     },
-    "STM32L151CBxxA": {
-        "OGChipSelectEditMenu": "STM32L151CB-A\tST STM32L151CB-A"
+    "STM32L152RCTx": {
+        "OGChipSelectEditMenu": "STM32L152RC\tST STM32L152RC"
     },
-    "STM32L152RE": {
-        "OGChipSelectEditMenu": "STM32L152xE\tST STM32L152xE"
+    "STM32L152RETx": {
+        "OGChipSelectEditMenu": "STM32L152RE\tST STM32L152RE"
     },
-    "STM32F439ZI": {
+    "STM32F439ZITx": {
         "OGChipSelectEditMenu": "STM32F439ZI\tST STM32F439ZI"
     },
-    "STM32F439VI": {
+    "STM32F439VITx": {
         "OGChipSelectEditMenu": "STM32F439VI\tST STM32F439VI"
     },
     "LPC1768": {
         "OGChipSelectEditMenu": "LPC1768\tNXP LPC1768"
     },
-    "STM32F446RE": {
+    "STM32F446RETx": {
         "OGChipSelectEditMenu": "STM32F446RE\tST STM32F446RE"
     },
-    "STM32L072CZ": {
+    "STM32L072CZTx": {
         "OGChipSelectEditMenu": "STM32L072CZ\tST STM32L072CZ"
     },
-    "STM32L073RZ": {
+    "STM32L073RZTx": {
         "OGChipSelectEditMenu": "STM32L073RZ\tST STM32L073RZ"
     },
-    "STM32F746ZG": {
+    "STM32F746ZGTx": {
         "OGChipSelectEditMenu": "STM32F746ZG\tST STM32F746ZG",
         "GBECoreSlave": 41,
         "CoreVariant": 41,
         "FPU2": 6,
         "NrRegs": 1
     },
-    "STM32F767ZI": {
+    "STM32F767VITx": {
+        "OGChipSelectEditMenu": "STM32F767VI\tST STM32F767VI",
+        "GBECoreSlave": 41,
+        "CoreVariant": 41,
+        "FPU2": 7,
+        "NrRegs": 1
+    },
+    "STM32F767ZITx": {
         "OGChipSelectEditMenu": "STM32F767ZI\tST STM32F767ZI",
         "GBECoreSlave": 41,
         "CoreVariant": 41,
         "FPU2": 7,
         "NrRegs": 1
     },
-    "STM32F746NG": {
+    "STM32F746NGHx": {
         "OGChipSelectEditMenu": "STM32F746NG\tST STM32F746NG",
         "GBECoreSlave": 41,
         "CoreVariant": 41,
         "FPU2": 6,
         "NrRegs": 1
     },
-    "STM32F411RE": {
+    "STM32F411RETx": {
         "OGChipSelectEditMenu": "STM32F411RE\tST STM32F411RE"
-    },
-    "STM32L053C8": {
-        "OGChipSelectEditMenu": "STM32L053x8\tST STM32L053x8"
-    },
-    "STM32L031K6": {
-        "OGChipSelectEditMenu": "STM32L031x6\tST STM32L031x6"
     },
     "EFM32HG322F64": {
         "OGChipSelectEditMenu": "EFM32HG322F64\tSiliconLaboratories EFM32HG322F64"
@@ -180,14 +196,11 @@
     "MK20DX256xxx7": {
         "OGChipSelectEditMenu": "MK20DX256xxx7\tFreescale MK20DX256xxx7"
     },
-    "STM32F446ZE": {
+    "STM32F446ZETx": {
         "OGChipSelectEditMenu": "STM32F446ZE\tST STM32F446ZE"
     },
     "STM32F303K8": {
         "OGChipSelectEditMenu": "STM32F303x8\tST STM32F303x8"
-    },
-    "STM32F405RG": {
-        "OGChipSelectEditMenu": "STM32F405RG\tST STM32F405RG"
     },
     "MK20DX128xxx5": {
         "OGChipSelectEditMenu": "MK20DX128xxx5\tFreescale MK20DX128xxx5"
@@ -195,13 +208,13 @@
     "MKL25Z128xxx4": {
         "OGChipSelectEditMenu": "MKL25Z128xxx4\tFreescale MKL25Z128xxx4"
     },
-    "STM32F429ZI": {
+    "STM32F429ZITx": {
         "OGChipSelectEditMenu": "STM32F429ZI\tST STM32F429ZI"
     },
     "STM32F103RB": {
-        "OGChipSelectEditMenu": "STM32F103xB\tST STM32F103xB"
+        "OGChipSelectEditMenu": "STM32F103RB\tST STM32F103RB"
     },
-    "STM32F091RC": {
+    "STM32F091RCTx": {
         "OGChipSelectEditMenu": "STM32F091RC\tST STM32F091RC"
     },
     "R7S72100": {
@@ -225,14 +238,11 @@
         "GBECoreSlave": 37,
         "NEON":1
     },
-    "STM32F031K6": {
-        "OGChipSelectEditMenu": "STM32F031x6\tST STM32F031x6"
-    },
     "MAX32600MBED": {
         "OGChipSelectEditMenu": "MAX32600x85\tMaxim MAX32600x85"
     },
-    "STM32F407VG": {
-        "OGChipSelectEditMenu": "STM32F407VG\tST STM32F407VG"
+    "STM32F407VETx": {
+        "OGChipSelectEditMenu": "STM32F407VE\tST STM32F407VE"
     },
     "nRF52832_xxAA":{
         "OGChipSelectEditMenu": "nRF52832-xxAA\tNordicSemi nRF52832-xxAA",
@@ -287,43 +297,31 @@
         "GFPUCoreSlave": 24,
         "GBECoreSlave": 24
     },
-    "STM32F446VE": {
-        "OGChipSelectEditMenu": "STM32F446VE\tST STM32F446VE"
+    "STM32F413RHTx": {
+        "OGChipSelectEditMenu": "STM32F413RH\tST STM32F413RH"
     },
-    "STM32F303VC": {
-        "OGChipSelectEditMenu": "STM32F303VC\tST STM32F303VC"
-    },
-    "STM32F334C8": {
-        "OGChipSelectEditMenu": "STM32F334C8\tST STM32F334C8"
-    },
-    "STM32F413ZH": {
+    "STM32F413ZHTx": {
         "OGChipSelectEditMenu": "STM32F413ZH\tST STM32F413ZH"
     },
-    "STM32F469NI": {
+    "STM32F469NIHx": {
         "OGChipSelectEditMenu": "STM32F469NI\tST STM32F469NI"
     },
-    "STM32F769NI": {
+    "STM32F769NIHx": {
         "OGChipSelectEditMenu": "STM32F769NI\tST STM32F769NI"
     },
-    "STM32F303ZE": {
+    "STM32F303ZETx": {
         "OGChipSelectEditMenu": "STM32F303ZE\tST STM32F303ZE"
     },
-    "STM32F410RB": {
-        "OGChipSelectEditMenu": "STM32F410RB\tST STM32F410RB"
-    },
-    "STM32F412ZG": {
+    "STM32F412ZGTx": {
         "OGChipSelectEditMenu": "STM32F412ZG\tST STM32F412ZG"
     },
-    "STM32F413ZH": {
+    "STM32F413ZHTx": {
         "OGChipSelectEditMenu": "STM32F413ZH\tST STM32F413ZH"
     },
-    "STM32F756ZG": {
+    "STM32F756ZGTx": {
         "OGChipSelectEditMenu": "STM32F756ZG\tST STM32F756ZG"
     },
-    "STM32L053R8": {
-        "OGChipSelectEditMenu": "STM32L053R8\tST STM32L053R8"
-    },
-    "STM32L432KC": {
+    "STM32L432KCUx": {
         "OGChipSelectEditMenu": "STM32L432KC\tST STM32L432KC"
     },
     "CY8C6347BZI-BLD53": {
@@ -380,14 +378,17 @@
         "IlinkProgramEntryLabel": "Reset_Handler",
         "TrustZone": 1
     },
-    "STM32H743ZI": {
+    "STM32H743ZITx": {
         "OGChipSelectEditMenu": "STM32H743ZI\tST STM32H743ZI"
     },
+    "STM32H7A3ZITxQ": {
+        "OGChipSelectEditMenu": "STM32H7A3ZI\tST STM32H7A3ZI"
+    },
     "STM32H747XIHx": {
-        "OGChipSelectEditMenu": "STM32H747XI_CM7\tST STM32H747XI_CM7"
+        "OGChipSelectEditMenu": "STM32H747XI_M7\tST STM32H747XI_M7"
     },
     "DISCO_H747I_CM4": {
-        "OGChipSelectEditMenu": "STM32H747XI_CM4\tST STM32H747XI_CM4"
+        "OGChipSelectEditMenu": "STM32H747XI_M4\tST STM32H747XI_M4"
     },
     "CC3220SF": {
         "OGChipSelectEditMenu": "CC3220SF\tTexasInstruments CC3220SF",
