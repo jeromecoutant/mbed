@@ -4040,7 +4040,7 @@
         ],
         "device_name": "STM32L4S5VITx"
     },
-    "MCU_STM32L5": {
+    "MCU_STM32L5_NPSA": {
         "inherits": [
             "MCU_STM32"
         ],
@@ -4084,9 +4084,9 @@
             "USBDEVICE"
         ]
     },
-    "MCU_STM32L552xE": {
+    "MCU_STM32L552xE_NPSA": {
         "inherits": [
-            "MCU_STM32L5"
+            "MCU_STM32L5_NPSA"
         ],
         "public": false,
         "extra_labels_add": [
@@ -4096,12 +4096,15 @@
             "STM32L552xx"
         ]
     },
-    "NUCLEO_L552ZE_Q": {
+    "NUCLEO_L552ZE_Q_NPSA": {
         "inherits": [
-            "MCU_STM32L552xE"
+            "MCU_STM32L552xE_NPSA"
         ],
         "supported_form_factors": [
             "ARDUINO_UNO"
+        ],
+        "extra_labels_add": [
+            "NUCLEO_L552ZE_Q"
         ],
         "device_name": "STM32L552ZETxQ",
         "detect_code": [
@@ -4110,7 +4113,7 @@
     },
     "MCU_STM32L562xE": {
         "inherits": [
-            "MCU_STM32L5"
+            "MCU_STM32L5_NPSA"
         ],
         "public": false,
         "extra_labels_add": [
