@@ -16,6 +16,8 @@
 #include "flash_api.h"
 #include "platform/mbed_critical.h"
 
+#include "region_defs.h"
+
 #if DEVICE_FLASH
 
 

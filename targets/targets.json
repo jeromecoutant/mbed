@@ -4131,7 +4131,29 @@
             "USBDEVICE"
         ]
     },
-    "MCU_STM32L552xE": {
+    "MCU_STM32L5_PSA": {
+        "inherits": [
+            "MCU_STM32L5"
+        ],
+        "core": "Cortex-M33FE-NS",
+        "public": false,
+        "features_add": [
+            "PSA",
+            "EXPERIMENTAL_API"
+        ],
+        "extra_labels_add": [
+            "TFM",
+            "TFM_LATEST",
+            "TFM_V8M"
+        ],
+        "tfm_bootloader_supported": true,
+        "tfm_default_toolchain": "ARMCLANG",
+        "tfm_supported_toolchains": [
+            "ARMCLANG",
+            "GNUARM"
+        ]
+    },
+    "MCU_STM32L552xE_NPSA": {
         "inherits": [
             "MCU_STM32L5"
         ],
@@ -4143,9 +4165,21 @@
             "STM32L552xx"
         ]
     },
-    "NUCLEO_L552ZE_Q": {
+    "MCU_STM32L552xE_PSA": {
         "inherits": [
-            "MCU_STM32L552xE"
+            "MCU_STM32L5_PSA"
+        ],
+        "public": false,
+        "extra_labels_add": [
+            "STM32L552xE"
+        ],
+        "macros_add": [
+            "STM32L552xx"
+        ]
+    },
+    "NUCLEO_L552ZE_Q_NPSA": {
+        "inherits": [
+            "MCU_STM32L552xE_NPSA"
         ],
         "supported_form_factors": [
             "ARDUINO_UNO"
@@ -4155,7 +4189,28 @@
             "0854"
         ]
     },
-    "MCU_STM32L562xE": {
+    "NUCLEO_L552ZE_Q": {
+        "inherits": [
+            "MCU_STM32L552xE_PSA"
+        ],
+        "supported_form_factors": [
+            "ARDUINO_UNO"
+        ],
+        "device_name": "STM32L552ZETxQ",
+        "macros_add": [
+            "CMSIS_NVIC_VIRTUAL"
+        ],
+        "detect_code": [
+            "0854"
+        ],
+        "post_binary_hook": {
+            "function": "xxx"
+        },
+        "secure_image_filename": "tfm_s.bin",
+        "tfm_target_name": "stm/nucleo_l552ze_q",
+        "tfm_delivery_dir": "TARGET_STM/TARGET_STM32L5/TARGET_STM32L552xE/TARGET_NUCLEO_L552ZE_Q"
+    },
+    "MCU_STM32L562xE_NPSA": {
         "inherits": [
             "MCU_STM32L5"
         ],
@@ -4170,7 +4225,7 @@
     },
     "DISCO_L562QE": {
         "inherits": [
-            "MCU_STM32L562xE"
+            "MCU_STM32L562xE_NPSA"
         ],
         "extra_labels_add": [
             "CORDIO",
