@@ -1302,7 +1302,7 @@ void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *I2cHandle)
 
     if (obj_s->slave == SLAVE_MODE_LISTEN) {
         obj_s->slave_rx_count++;
-        if (obj_s->slave_rx_count < obj_s->slave_rx_buffer_size){
+        if (obj_s->slave_rx_count < obj_s->slave_rx_buffer_size) {
             HAL_I2C_Slave_Seq_Receive_IT(I2cHandle, &(obj_s->slave_rx_buffer[obj_s->slave_rx_count]), 1, I2C_NEXT_FRAME);
         } else {
             obj_s->pending_slave_rx_maxter_tx = 0;
@@ -1352,12 +1352,12 @@ int i2c_slave_read(i2c_t *obj, char *data, int length)
     int _length = 0;
 
     if (obj_s->slave == SLAVE_MODE_LISTEN) {
-       /*  We don't know in advance how many bytes will be sent by master so
-        *  we'll fetch one by one until master ends the sequence */
+        /*  We don't know in advance how many bytes will be sent by master so
+         *  we'll fetch one by one until master ends the sequence */
         _length = 1;
         obj_s->slave_rx_buffer_size = length;
         obj_s->slave_rx_count = 0;
-        obj_s->slave_rx_buffer = (uint8_t*)data;
+        obj_s->slave_rx_buffer = (uint8_t *)data;
     } else {
         _length = length;
     }
