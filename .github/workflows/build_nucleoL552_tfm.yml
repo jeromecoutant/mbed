@@ -1,0 +1,72 @@
+on:
+  push:
+    branches:
+        DEV_TFM
+
+jobs:
+  blinky:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: build CL1
+        uses: addnab/docker-run-action@v3
+        with:
+          options: -v ${{ github.workspace }}:/work -w=/work
+          image: mbedos/mbed-os-env:latest
+          shell: bash
+          run: |
+            pip3 list | grep mbed
+            # pip3 install mbed-cli -U
+            # pip3 install mbed-os-tools -U
+            arm-none-eabi-gcc --version
+            cd ..
+            git clone https://github.com/ARMmbed/mbed-os-example-blinky.git
+            cd mbed-os-example-blinky
+            mkdir mbed-os
+            mv ../work/* mbed-os/
+            mbed compile -m NUCLEO_L552ZE_Q_NPSA -t GCC_ARM
+
+      - name: build CL2
+        uses: addnab/docker-run-action@v3
+        with:
+          options: -v ${{ github.workspace }}:/work -w=/work
+          image: mbedos/mbed-os-env:latest
+          shell: bash
+          run: |
+            pip3 list | grep mbed
+            # pip3 install mbed-tools -U
+            arm-none-eabi-gcc --version
+            ninja --version
+            cmake --version
+            cd ..
+            git clone https://github.com/ARMmbed/mbed-os-example-blinky.git
+            cd mbed-os-example-blinky
+            mkdir mbed-os
+            mv ../work/* mbed-os/
+            mbedtools compile -m NUCLEO_L552ZE_Q_NPSA -t GCC_ARM
+
+  greentea:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: NPSA
+        uses: addnab/docker-run-action@v3
+        with:
+          options: -v ${{ github.workspace }}:/work -w=/work
+          image: mbedos/mbed-os-env:latest
+          shell: bash
+          run: |
+            mbed test -m NUCLEO_L552ZE_Q_NPSA -t GCC_ARM -n driver*echo --compile
+
+      - name: TZ
+        uses: addnab/docker-run-action@v3
+        with:
+          options: -v ${{ github.workspace }}:/work -w=/work
+          image: mbedos/mbed-os-env:latest
+          shell: bash
+          run: |
+            mbed test -m NUCLEO_L552ZE_Q -t GCC_ARM -n driver*echo --compile

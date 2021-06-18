@@ -1,0 +1,61 @@
+name: astyle
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  astyle_check:
+    runs-on: ubuntu-latest
+    name: AStyle check
+    steps:
+    # First of all, clone the repo using the checkout action.
+    - uses: actions/checkout@v2
+
+    - name: Astyle targets
+      uses: stm32duino/actions/astyle-check@master
+      with:
+        astyle-definition: '.astylerc'
+        source-root-path: 'targets/TARGET_STM'
+        ignore-path-list: '.github/workflows/action_astyle.ignore'
+
+    - name: Astyle emac
+      if: ${{ always() }}
+      uses: stm32duino/actions/astyle-check@master
+      with:
+        astyle-definition: '.astylerc'
+        source-root-path: 'connectivity/drivers/emac/TARGET_STM'
+        ignore-path-list: '.github/workflows/action_astyle.ignore'
+
+    - name: Astyle ble
+      if: ${{ always() }}
+      uses: stm32duino/actions/astyle-check@master
+      with:
+        astyle-definition: '.astylerc'
+        source-root-path: 'connectivity/drivers/ble/FEATURE_BLE/TARGET_STM32WB'
+        ignore-path-list: '.github/workflows/action_astyle.ignore'
+
+    - name: Astyle cellular
+      if: ${{ always() }}
+      uses: stm32duino/actions/astyle-check@master
+      with:
+        astyle-definition: '.astylerc'
+        source-root-path: 'connectivity/drivers/cellular/COMPONENT_STMOD_CELLULAR'
+        ignore-path-list: '.github/workflows/action_astyle.ignore'
+
+    - name: Astyle lora
+      if: ${{ always() }}
+      uses: stm32duino/actions/astyle-check@master
+      with:
+        astyle-definition: '.astylerc'
+        source-root-path: 'connectivity/drivers/lora/TARGET_STM32WL'
+        ignore-path-list: '.github/workflows/action_astyle.ignore'
+
+    - name: Astyle mbedtls
+      if: ${{ always() }}
+      uses: stm32duino/actions/astyle-check@master
+      with:
+        astyle-definition: '.astylerc'
+        source-root-path: 'connectivity/drivers/mbedtls/TARGET_STM'
+        ignore-path-list: '.github/workflows/action_astyle.ignore'
